@@ -1,0 +1,176 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>timezones</groupId>
+  <artifactId>timezones-maven-parent</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Timezones :: Maven Parent</name>
+  <description>Maven parent</description>
+
+  <prerequisites>
+    <maven>3.2.3</maven>
+  </prerequisites>
+
+  <properties>
+
+    <!-- pattern/format used for the qualifier -->
+    <qualifier.format>'v'yyyyMMdd-HHmm</qualifier.format>
+
+    <!-- project defaults -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- versions used for plug-ins below -->
+    <tycho-version>0.22.0</tycho-version>
+    <tycho-extras-version>0.22.0</tycho-extras-version>
+
+    <!-- versions of the EBR plug-in to use -->
+    <timezones-target-platform.version>1.0.0-SNAPSHOT</timezones-target-platform.version>
+
+    <!-- property for generating Eclipse source reference bundle headers -->
+    <tycho.scmUrl>scm:git:git@github.com:eclipseguru/gyrex-timezones-example.git</tycho.scmUrl>
+
+    <!-- by default complain if working tree is dirty (error|warning|ignore) -->
+    <dirtyWorkingTree>error</dirtyWorkingTree>
+
+  </properties>
+
+  <build>
+    <plugins>
+      <!-- configure default plug-ins -->
+
+      <!-- enable Tycho -->
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-maven-plugin</artifactId>
+        <extensions>true</extensions>
+      </plugin>
+
+      <!-- target platform configuration -->
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>target-platform-configuration</artifactId>
+        <configuration>
+          <target>
+            <!-- use target platform defined in releng/targetplatform -->
+            <!-- (note: name of target file must match artifactId) -->
+            <artifact>
+              <groupId>timezones</groupId>
+              <artifactId>timezones-target-platform</artifactId>
+              <version>${timezones-target-platform.version}</version>
+            </artifact>
+          </target>
+          <environments>
+            <environment>
+              <os>linux</os>
+              <ws>gtk</ws>
+              <arch>x86_64</arch>
+            </environment>
+            <environment>
+              <os>win32</os>
+              <ws>win32</ws>
+              <arch>x86_64</arch>
+            </environment>
+            <environment>
+              <os>macosx</os>
+              <ws>cocoa</ws>
+              <arch>x86_64</arch>
+            </environment>
+          </environments>
+        </configuration>
+      </plugin>
+
+      <!-- configure build qualifier generation as well as source reference
+        headers -->
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-packaging-plugin</artifactId>
+        <dependencies>
+          <dependency>
+            <groupId>org.eclipse.tycho.extras</groupId>
+            <artifactId>tycho-sourceref-jgit</artifactId>
+            <version>${tycho-version}</version>
+          </dependency>
+          <dependency>
+            <groupId>org.eclipse.tycho.extras</groupId>
+            <artifactId>tycho-buildtimestamp-jgit</artifactId>
+            <version>${tycho-version}</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <!-- use qualifier from properties -->
+          <format>${qualifier.format}</format>
+          <!-- generate bundle .qualifier from Git tags/commits -->
+          <timestampProvider>jgit</timestampProvider>
+          <!-- allow to ignore dirty working trees -->
+          <jgit.dirtyWorkingTree>${dirtyWorkingTree}</jgit.dirtyWorkingTree>
+          <!-- generate source references -->
+          <sourceReferences>
+            <generate>true</generate>
+          </sourceReferences>
+        </configuration>
+      </plugin>
+
+    </plugins>
+    <pluginManagement>
+      <!-- define versions and defaults for plug-ins used in Maven -->
+
+      <plugins>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-maven-plugin</artifactId>
+          <version>${tycho-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-packaging-plugin</artifactId>
+          <version>${tycho-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-p2-plugin</artifactId>
+          <version>${tycho-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-p2-director-plugin</artifactId>
+          <version>${tycho-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-p2-repository-plugin</artifactId>
+          <version>${tycho-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>target-platform-configuration</artifactId>
+          <version>${tycho-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-source-plugin</artifactId>
+          <version>${tycho-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho.extras</groupId>
+          <artifactId>tycho-source-feature-plugin</artifactId>
+          <version>${tycho-extras-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho.extras</groupId>
+          <artifactId>tycho-custom-bundle-plugin</artifactId>
+          <version>${tycho-extras-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho.extras</groupId>
+          <artifactId>tycho-p2-extras-plugin</artifactId>
+          <version>${tycho-extras-version}</version>
+        </plugin>
+      </plugins>
+
+    </pluginManagement>
+  </build>
+
+</project>

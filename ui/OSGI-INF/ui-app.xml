@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="false" name="timezones.ui.component">
+   <implementation class="org.eclipse.gyrex.http.staticresource.StaticResourceApplicationProvider"/>
+   <property name="service.vendor" type="String" value="Timezones UI"/>
+   <property name="service.description" type="String" value="Timezones Web App"/>
+   <property name="automount.url" type="String" value="http:/app/"/>
+   <property name="resource.path" type="String" value="dist"/>
+   <service>
+      <provide interface="org.eclipse.gyrex.http.application.provider.ApplicationProvider"/>
+   </service>
+</scr:component>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>timezones.ui</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>eclipse-plugin</packaging>
+
+  <parent>
+    <groupId>timezones</groupId>
+    <artifactId>timezones-maven-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../releng/mavenparent/</relativePath>
+  </parent>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.github.trecloux</groupId>
+        <artifactId>yeoman-maven-plugin</artifactId>
+        <version>0.2</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <yeomanProjectDirectory>${basedir}</yeomanProjectDirectory>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

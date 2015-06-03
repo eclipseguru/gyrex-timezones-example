@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="false" name="timezones.backend.rest.api.component">
+   <implementation class="org.eclipse.gyrex.http.jaxrs.JaxRsApplicationProviderComponent"/>
+   <property name="service.vendor" type="String" value="Timezones Backend"/>
+   <property name="service.description" type="String" value="Timezones REST API"/>
+   <property name="automount.url" type="String" value="http:/api/"/>
+   <service>
+      <provide interface="org.eclipse.gyrex.http.application.provider.ApplicationProvider"/>
+   </service>
+</scr:component>

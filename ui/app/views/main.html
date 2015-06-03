@@ -1,0 +1,49 @@
+<div class="container">
+  <h2>My Timezones</h2>
+
+
+  <!-- create timezones -->
+  <div class="row">
+    <form class="form-horizontal" ng-submit="addTimezone()">
+      <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="name" ng-model="name" placeholder="Name" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="city" class="col-sm-2 control-label">City</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="city" ng-model="city" placeholder="City" >
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="offset" class="col-sm-2 control-label">Offset</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" id="offset" min="-12" max="12" ng-model="offset" placeholder="Offset" >
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-default">Add</button>
+          <span id="helpBlock" class="help-block">Please enter timezone information and click add to add a new timezone to the list. It will appear below.</span>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- display timezones -->
+  <form name="displayform.state" auto-save-form="saveTimezones()">
+  <div class="row" ui-sortable="sortCallback" ng-model="timezones">
+    <p class="input-group" ng-repeat="timezone in timezones" style="padding:5px 10px; cursor: move;">
+      <input class="col-md-2" type="text" ng-model="timezone.name">&nbsp;
+      <input class="col-md-2" type="text" ng-model="timezone.city">&nbsp;
+      <input class="col-md-2" type="number" ng-model="timezone.offset">&nbsp;
+      <input class="col-md-4" type="text" ng-model="timezone.currentTime" readonly="true" style="border: none !important;">&nbsp;
+      <button class="col-md-1 btn btn-danger" ng-click="removeTimezone($index)" aria-label="Remove">X</button>
+    </p>
+    <span class="help-block" ng-if="displayform.state.$dirty && displayform.state.$valid">Updating ...</span>
+  </div>
+  </form>
+
+</div>

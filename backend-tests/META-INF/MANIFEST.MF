@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Backend Tests
+Bundle-SymbolicName: timezones.backend.tests
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Gunnar Wagenknecht
+Fragment-Host: timezones.backend;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.junit;bundle-version="4.11.0",
+ org.eclipse.gyrex.junit;bundle-version="1.0.0"
+Import-Package: org.apache.http;version="4.2.5",
+ org.apache.http.client;version="4.2.6",
+ org.apache.http.client.fluent;version="4.2.6",
+ org.apache.http.client.utils;version="4.2.6",
+ org.apache.http.entity;version="4.2.5",
+ org.apache.http.util;version="4.2.5"

@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Timezones Backend
+Bundle-SymbolicName: timezones.backend
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Gunnar Wagenknecht
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Import-Package: javax.inject;version="1.0.0",
+ javax.ws.rs;version="1.1.1",
+ javax.ws.rs.core;version="1.1.1",
+ org.eclipse.gyrex.context.provider;version="1.0.0",
+ org.eclipse.gyrex.http.jaxrs;version="1.0.0"
+Service-Component: OSGI-INF/rest-api.xml
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: libs/java-jwt-2.0.1.jar,
+ libs/json-20141113.jar,
+ .

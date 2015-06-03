@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Timezones UI
+Bundle-SymbolicName: timezones.ui
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Gunnar Wagenknecht
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Service-Component: OSGI-INF/ui-app.xml
+Require-Bundle: org.eclipse.gyrex.http;bundle-version="1.2.0"
+Bundle-ActivationPolicy: lazy
