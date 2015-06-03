@@ -21,7 +21,7 @@ angular.module('timezonesuiApp')
             $location.path('/');
         };
 
-        var error = function (data, status, headers, config) {
+        var error = function (data, status) {
             $window.alert('login failed: ' + status);
             $cookieStore.remove('tztoken');
             api.init('');
@@ -31,7 +31,7 @@ angular.module('timezonesuiApp')
     };
 
     $scope.signup = function ($event) {
-      //$event.preventDefault();
+      $event.preventDefault();
 
       // add validation here
 
@@ -40,12 +40,12 @@ angular.module('timezonesuiApp')
             password: this.password
         };
 
-        var success = function (data, status) {
+        var success = function () {
             $log.debug('Sign up successful. Performing login.');
             $scope.login();
         };
 
-        var error = function (data, status, headers, config) {
+        var error = function (data, status) {
             $log.error('Sign up fail: ' + status);
             $window.alert('signup failed: ' + status);
             $cookieStore.remove('tztoken');

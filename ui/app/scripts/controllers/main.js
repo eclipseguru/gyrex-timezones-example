@@ -8,7 +8,7 @@
  * Controller of the timezonesuiApp
  */
 angular.module('timezonesuiApp')
-  .controller('MainCtrl', function ($scope, timezones, $timeout, $log) {
+  .controller('MainCtrl', function ($scope, timezones, $timeout) {
 
     $scope.timezones = [ ];
 
@@ -60,9 +60,9 @@ angular.module('timezonesuiApp')
       timezones.save($scope.timezones);
     };
 
-    // cllback to save on sorting
+    // callback to save on sorting
     $scope.sortCallback = {
-      stop: function(e, ui) {
+      stop: function() {
         //$scope.saveTimezones();
         $scope.displayform.state.$dirty = true;
       }
@@ -82,10 +82,10 @@ angular.module('timezonesuiApp').factory('timezones', function ($http, $log) {
           });
       },
 
-      save: function (timezones, callback) {
+      save: function (timezones) {
           $log.debug('Saving timezones to server.');
           return $http.put('/api/timezones', timezones).
-            success(function(data) {
+            success(function() {
               $log.info('Timezones saved successfully to server.');
           });
       }
@@ -99,7 +99,7 @@ angular.module('timezonesuiApp').directive('autoSaveForm', function($timeout) {
 
   return {
     require: ['^form'],
-    link: function($scope, $element, $attrs, $ctrls, $log) {
+    link: function($scope, $element, $attrs, $ctrls) {
 
       var $formCtrl = $ctrls[0];
       var savePromise = null;
