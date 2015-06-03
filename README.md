@@ -20,3 +20,7 @@ This sample application shows time in different timezones.
 * Import all projects into Eclipse
 * Set target platform (in releng folder)
 * For Frontend you need npm, node.js, Bower and Grunt
+
+## UI Notes
+
+* Upgrade dependencies with https://www.npmjs.com/package/npm-check-updates
