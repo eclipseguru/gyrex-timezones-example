@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Timezones Backend Development" sequenceNumber="5">
+<?pde version="3.8"?><target name="Timezones Backend Development" sequenceNumber="10">
 <locations>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.test.feature.group" version="3.6.100.v20140528-1640"/>
@@ -32,8 +32,14 @@
 <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20150519210750/repository/"/>
 </location>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.gyrex.features.master.feature.group" version="1.5.0.v20150603-1702"/>
+<unit id="org.eclipse.gyrex.features.master.feature.group" version="1.5.0.v20150604-2338"/>
+<unit id="org.eclipse.gyrex.products.server" version="1.5.0.v20150604-2338"/>
 <repository location="http://download.eclipse.org/gyrex/1.5/milestones/"/>
+</location>
+<location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.equinox.p2.user.ui.source.feature.group" version="2.2.100.v20150527-1706"/>
+<unit id="org.eclipse.equinox.sdk.feature.group" version="3.11.0.v20150527-1706"/>
+<repository location="http://download.eclipse.org/eclipse/updates/4.5milestones/"/>
 </location>
 </locations>
 </target>
