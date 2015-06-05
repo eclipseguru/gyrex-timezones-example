@@ -16,8 +16,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
-import org.json.JSONObject;
-
 import tomezones.backend.services.User;
 
 /**
@@ -34,17 +32,17 @@ public class UsersResource extends ResourceRequiringAuthentication {
 	@Path("/authenticate")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response authenticate(@FormParam("username") final String username, @FormParam("password") final String password) {
+	public AuthenticateUserResponse authenticate(@FormParam("username") final String username, @FormParam("password") final String password) {
 		final String token = userService.authenticate(username, password, DEFAULT_EXPIRY_TIME);
 		if (token == null) {
 			throw new WebApplicationException(Status.FORBIDDEN);
 		}
 
-		final JSONObject o = new JSONObject();
-		o.put("user", username);
-		o.put("token", token);
+		final AuthenticateUserResponse response = new AuthenticateUserResponse();
+		response.user = username;
+		response.token = token;
 
-		return Response.ok(o.toString(), MediaType.APPLICATION_JSON).build();
+		return response;
 	}
 
 	@POST

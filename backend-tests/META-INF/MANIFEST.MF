@@ -14,3 +14,5 @@ Import-Package: org.apache.http;version="4.2.5",
  org.apache.http.client.utils;version="4.2.6",
  org.apache.http.entity;version="4.2.5",
  org.apache.http.util;version="4.2.5"
+Bundle-ClassPath: libs/json-20141113.jar,
+ .
