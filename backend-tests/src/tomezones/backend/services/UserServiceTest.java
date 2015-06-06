@@ -5,12 +5,16 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+
 import org.junit.Before;
 import org.junit.Test;
 
 public class UserServiceTest {
 
 	private UserService service;
+	private UserStore userStore;
 
 	private void assertCanCreateUser(final String username, final String password) {
 		assertNull(service.getUser(username));
@@ -137,7 +141,19 @@ public class UserServiceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		service = new UserService();
-	}
+		userStore = new UserStore() {
+			private final ConcurrentMap<String, User> users = new ConcurrentHashMap<>();
 
+			@Override
+			public User get(String userName) {
+				return users.get(userName);
+			}
+
+			@Override
+			public boolean storeIfAbsent(User user) {
+				return users.putIfAbsent(user.getName(), user) == null;
+			}
+		};
+		service = new UserService(userStore);
+	}
 }

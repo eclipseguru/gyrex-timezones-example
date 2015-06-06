@@ -18,3 +18,5 @@ Service-Component: OSGI-INF/rest-api.xml
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: libs/java-jwt-2.0.1.jar,
  .
+Export-Package: tomezones.backend.services,
+ tomezones.rest.api

@@ -33,7 +33,7 @@ public class UsersResource extends ResourceRequiringAuthentication {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
 	public AuthenticateUserResponse authenticate(@FormParam("username") final String username, @FormParam("password") final String password) {
-		final String token = userService.authenticate(username, password, DEFAULT_EXPIRY_TIME);
+		final String token = getUserService().authenticate(username, password, DEFAULT_EXPIRY_TIME);
 		if (token == null) {
 			throw new WebApplicationException(Status.FORBIDDEN);
 		}
@@ -48,12 +48,24 @@ public class UsersResource extends ResourceRequiringAuthentication {
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public Response createUser(@FormParam("username") final String username, @FormParam("password") final String password) {
-		final User user = userService.createUser(username, password);
+		final User user = getUserService().createUser(username, password);
 		if (user == null) {
 			return Response.status(Status.CONFLICT).build();
 		}
 
 		return Response.created(uri.getBaseUriBuilder().path(UsersResource.class).path("{id}").build(user.getName())).build();
+	}
+
+	@GET
+	@Path("/_status")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String getStatus() {
+		try {
+			getUserService().getUser("dummy");
+			return "OK";
+		} catch (final IllegalStateException e) {
+			throw new WebApplicationException(Response.status(501).entity("DOWN").type(MediaType.TEXT_PLAIN_TYPE).build());
+		}
 	}
 
 	@GET
@@ -64,7 +76,7 @@ public class UsersResource extends ResourceRequiringAuthentication {
 			throw new WebApplicationException(Status.FORBIDDEN);
 		}
 
-		final User user = userService.getUser(username);
+		final User user = getUserService().getUser(username);
 		if (user == null) {
 			throw new WebApplicationException(Status.NOT_FOUND);
 		}

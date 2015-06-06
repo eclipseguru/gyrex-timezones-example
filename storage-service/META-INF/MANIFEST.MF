@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Storage Service
+Bundle-SymbolicName: timezones.storage.service
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Gunnar Wagenknecht
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Service-Component: OSGI-INF/user-store.xml
+Bundle-ActivationPolicy: lazy
+Import-Package: tomezones.backend.services

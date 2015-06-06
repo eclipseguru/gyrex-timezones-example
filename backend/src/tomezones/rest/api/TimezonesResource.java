@@ -20,11 +20,7 @@ import tomezones.backend.services.Timezone;
 import tomezones.backend.services.TimezoneService;
 
 /**
- * /api - /users - GET .... list of users (ids) - POST .... creating user - /
- * <userid> - GET ... get user details for the user with id - DELETE -
- * /timezones - GET ... list of timezone (optional param for filter) - PUT ....
- * saving list timezone /<name> - GET ... get single timezone - DELTE ...
- * deleting timezone
+ * API for time zones.
  */
 @Path("/timezones")
 public class TimezonesResource extends ResourceRequiringAuthentication {

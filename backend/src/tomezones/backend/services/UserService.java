@@ -6,8 +6,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SignatureException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import com.auth0.jwt.JWTExpiredException;
 import com.auth0.jwt.JWTSigner;
@@ -18,10 +16,14 @@ import com.auth0.jwt.JWTVerifyException;
 public class UserService {
 
 	private final String SECRET = "secret";
-	JWTSigner signer = new JWTSigner(SECRET);
-	JWTVerifier verifier = new JWTVerifier(SECRET);
+	final JWTSigner signer = new JWTSigner(SECRET);
+	final JWTVerifier verifier = new JWTVerifier(SECRET);
 
-	ConcurrentMap<String, User> users = new ConcurrentHashMap<>();
+	private final UserStore userStore;
+
+	public UserService(UserStore userStore) {
+		this.userStore = userStore;
+	}
 
 	/**
 	 * Authenticates a user.
@@ -38,7 +40,7 @@ public class UserService {
 	 *         is unknown or the password is wrong)
 	 */
 	public String authenticate(final String userName, final String password, final int expiryInSeconds) {
-		final User user = users.get(userName);
+		final User user = userStore.get(userName);
 		if (user == null) {
 			return null;
 		}
@@ -55,7 +57,7 @@ public class UserService {
 
 	public User createUser(final String username, final String password) {
 		final User user = new User(username, password);
-		if (users.putIfAbsent(username, user) == null) {
+		if (userStore.storeIfAbsent(user)) {
 			return user;
 		}
 
@@ -63,7 +65,7 @@ public class UserService {
 	}
 
 	public User getUser(final String user) {
-		return users.get(user);
+		return userStore.get(user);
 	}
 
 	public String isAuthenticated(final String token) {
